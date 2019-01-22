@@ -155,15 +155,14 @@
 
 \title[Machine Learning]{Machine learning and physical modelling-1}
 \author[J. Brajard]{julien.brajard@nersc.no}
-\institute[NERSC/SU]{NERSC/Sorbonne University}
+\institute[NERSC/SU]{NERSC/Sorbonne University\\
+\url{https://github.com/brajard/Geilo-Winter-school}}
 \date{21-25 January 2018}
 
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%% SLIDES DE TITRE
 \begin{frame}
 \titlepage
-%\centering{
-%\url{http://australe.upmc.fr} (onglet EPU-C5-IGE Info Gen)}
 \end{frame}
 
 \begin{frame}{Table of contents}
@@ -179,7 +178,7 @@
   \begin{tikzpicture}[scale=0.9]
     \draw<3-> {(0,0) ellipse (2 and 1)};
     \draw<2-> {(0.3,0.3) ellipse (2.5 and 1.5)};
-    \draw<1-> {(0.6,0.6) ellipse (3 and 2)};
+    \draw<1-> {(0.6,0.6) ellipse (3.1 and 2.1)};
     \draw<5->[line width = 0.5mm]  {(0.3,0.3) ellipse (2.5 and 1.5)};
      \node<3-> at (0,0) {Deep Learning};
   \node<2-> at (.3,1.2) {\alert<5->{Machine Learning}};
@@ -252,7 +251,7 @@
  \end{axis} 
 \end{tikzpicture}
 \end{figure}
-Deep learning architectures was based on Convolutional Neural Networks (CNN).
+Deep learning architectures were based on Convolutional Neural Networks (CNN).
 \end{frame}
 
 
@@ -265,7 +264,7 @@ Objective : translate a text from a language to another.
 \includegraphics[width=.8\textwidth]{./fig/L1/google-trad.png}
 \end{figure}
 \begin{itemize}
-\item {\bf Oct. 2013}: Pionneering scientic paper about neural networks in machine translation(Kalchbrenner, N., and Blunsom, P).
+\item {\bf Oct. 2013}: Pionneering scientic paper about neural networks in machine translation (Kalchbrenner, N., and Blunsom, P).
 \item {\bf 2016}: Neural machine translation outperform tradiational approaches on public benchmarks
 \item {\bf 2017}: Major systems (Google, Systran, WIPO, Microsoft) switch to
   neural machine translation  (using deep recurrent neural networks)
@@ -304,7 +303,7 @@ Prediction based on Random Forest.
 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]{Reasons for these recent achievements?}
     \begin{itemize}
-        \item Increasing of the datasets in size an quality
+        \item Increasing of the datasets in size and quality
         \only<1> {
         \begin{figure}
 \includegraphics[width=.6\textwidth]{fig/L1/Wikipedia_article_size_in_gigabytes.png}
@@ -436,7 +435,7 @@ some coherent categories.
 \item Determine typical behaviors of clients in a supermarket knowing what the have bought.
 \end{itemize}
 \item \alert{Semi-Supervised Learning}: Only a few subset of the data are labeled
-\item \alert{Reinforcement Learning}: We have observations of interactions between an environment and an agent. We want to optimize the behavior of the agent.
+\item \alert{Reinforcement Learning}: We can initiate and observe the interaction of an agent with its environment. We want to optimize the behavior of the agent.
 \begin{itemize}
 \item Playing a chess game.
 \end{itemize}
@@ -524,15 +523,19 @@ What are \alert{the ingredients}?
     \item $y$ is known: supervised learning
     \item $y$ is quantitative: regression
     \end{itemize}
+\pause
 \item An \alert{Objective}: Estimate $\hat{y}$ from $x$ by minimizing $(\hat{y}-{y})^2$ (Least-square objective)
 
 \end{itemize}
 \column{.5\textwidth}
 \begin{itemize}
+\pause
     \item A \alert{model}: $y = \theta_1 X + \theta_0$ (linear)
+\pause
     \item A \alert{learning} process:
     $\mathbf{\theta}=(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^Ty$
 \end{itemize}
+\pause
 \begin{block}{Result}
     \begin{figure}
     \includegraphics[width=.9\textwidth]{fig/L1/interp-lin.png}
@@ -548,18 +551,21 @@ $y=\theta_0 + \theta_1 x + \theta_2 x^2 + \cdots + \theta_d x^d = \sum_{i=0}^d \
 \end{block}
 \begin{columns}
 \column{.33\textwidth}
+\pause
     \begin{figure}
     \caption*{degree = 1 (linear)}
     \includegraphics[width=\textwidth]{fig/L1/interp-pol-1.png}
     \end{figure}
 \column{.33\textwidth}
+\pause
     \begin{figure}
-    \caption*{degree = 2 (linear)}
+    \caption*{degree = 2 }
     \includegraphics[width=\textwidth]{fig/L1/interp-pol-2.png}
     \end{figure}
 \column{.33\textwidth}
+\pause
     \begin{figure}
-    \caption*{degree = 30 (linear)}
+    \caption*{degree = 30 }
     \includegraphics[width=\textwidth]{fig/L1/interp-pol-30.png}
     \end{figure}
  
@@ -576,6 +582,7 @@ $y=\theta_0 + \theta_1 x + \theta_2 x^2 + \cdots + \theta_d x^d = \sum_{i=0}^d \
 \begin{block}{The idea}
 Evaluate a score on a independent dataset
 \end{block}
+\pause
 In our example we can randomly divide $(X,y)$ in two datasets:
 \begin{itemize}
     \item The training dataset $X_{train},y_{train}$ used to fit the  model.
@@ -610,6 +617,7 @@ In our example we can randomly divide $(X,y)$ in two datasets:
     \end{tabular}
     \end{table}
 \end{columns}
+\pause
 \begin{block}{Drawbacks}
 \begin{itemize}
     \item drastically reduce the number of samples which can be used for learning the model
@@ -627,21 +635,24 @@ $y=\theta_0 + \theta_1 x + \theta_2 x^2 + \cdots + \theta_d x^d = \sum_{i=0}^d \
 \column{.33\textwidth}
     \begin{figure}
     \caption*{degree = 1 (linear)}
-    \includegraphics[width=\textwidth]{fig/L1/interp-pol-1.png}
+    \includegraphics[width=\textwidth]{fig/L1/interp-pol-1.png}\\
+        underfitting
+
     \end{figure}
-    underfitting
 \column{.33\textwidth}
     \begin{figure}
-    \caption*{degree = 2 (linear)}
-    \includegraphics[width=\textwidth]{fig/L1/interp-pol-2.png}
+    \caption*{degree = 2 }
+    \includegraphics[width=\textwidth]{fig/L1/interp-pol-2.png}\\
+        good fit
+
     \end{figure}
-    good fit
 \column{.33\textwidth}
     \begin{figure}
-    \caption*{degree = 30 (linear)}
-    \includegraphics[width=\textwidth]{fig/L1/interp-pol-30.png}
+    \caption*{degree = 30 }
+    \includegraphics[width=\textwidth]{fig/L1/interp-pol-30.png}\\
+        overfitting
+
     \end{figure}
-    overfitting
  
 \end{columns}
 
@@ -667,7 +678,7 @@ $y=\theta_0 + \theta_1 x + \theta_2 x^2 + \cdots + \theta_d x^d = \sum_{i=0}^d \
 
 
 %%%%%%%%%%%%%%%%%%
-\begin{frame}{multidimensional data}
+\begin{frame}{Multidimensional data}
 Generally, we have multidimensional data $X$ and a one-dimensional target $y$.
 \begin{figure}
 \begin{tikzpicture}
