@@ -153,7 +153,7 @@
 %Numéro du cours
 \newcommand{\nb}{1}
 
-\title[Machine Learning]{Machine learning and physical modelling}
+\title[Machine Learning]{Machine learning and physical modelling-1}
 \author[J. Brajard]{julien.brajard@nersc.no}
 \institute[NERSC/SU]{NERSC/Sorbonne University}
 \date{21-25 January 2018}
@@ -617,6 +617,39 @@ In our example we can randomly divide $(X,y)$ in two datasets:
 \end{itemize}
 \end{block}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Choice of the model}
+\begin{block}{Polynomial regression}
+$y=\theta_0 + \theta_1 x + \theta_2 x^2 + \cdots + \theta_d x^d = \sum_{i=0}^d \theta_i X^i$
+\end{block}
+\begin{columns}
+\column{.33\textwidth}
+    \begin{figure}
+    \caption*{degree = 1 (linear)}
+    \includegraphics[width=\textwidth]{fig/L1/interp-pol-1.png}
+    \end{figure}
+    underfitting
+\column{.33\textwidth}
+    \begin{figure}
+    \caption*{degree = 2 (linear)}
+    \includegraphics[width=\textwidth]{fig/L1/interp-pol-2.png}
+    \end{figure}
+    good fit
+\column{.33\textwidth}
+    \begin{figure}
+    \caption*{degree = 30 (linear)}
+    \includegraphics[width=\textwidth]{fig/L1/interp-pol-30.png}
+    \end{figure}
+    overfitting
+ 
+\end{columns}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%
 \begin{frame}{More Robust: cross validation}
     \begin{block}{The idea}
