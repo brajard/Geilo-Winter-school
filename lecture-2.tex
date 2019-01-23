@@ -157,7 +157,8 @@
 
 \title[Machine Learning]{Machine learning and physical modelling-2}
 \author[J. Brajard]{julien.brajard@nersc.no}
-\institute[NERSC/SU]{NERSC/Sorbonne University}
+\institute[NERSC/SU]{NERSC/Sorbonne University\\
+\url{https://github.com/brajard/Geilo-Winter-school}}
 \date{21-25 January 2018}
 
 \begin{document}
@@ -360,7 +361,7 @@ One extension of Regression Tree:
 \end{tikzpicture}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Results Uni-variate example}
+\begin{frame}{Results on the univariate experiment}
 
 \begin{figure}
     \centering
@@ -381,9 +382,9 @@ from sklearn.ensemble import RandomForestClassifier
 rf = RandomForestRegressor(n_estimators=n, max_features=maxf, min_samples_split=min_split,...)
 \end{lstlisting}
 \begin{itemize}[<+->]
-    \item \verb|n_estimators|: number of trees is the better (generally the larger is the better)
-    \item   \verb|max_features|: number of feature to consider at each split. The default number is the total number of feature. A large value makes a a small bias (accuracy) but a bigger variance (risk of overfitting)
-      \item \verb|min_samples_fit|: number of feature to consider at each split. The minimum value of 2 means that the tree is fully developed (small bias but great variance).
+    \item \verb|n_estimators|: number of trees (generally the larger is the better)
+    \item   \verb|max_features|: number of features to consider at each split. The default number is the total number of features. A larger value makes provides a smaller bias (accuracy) but a bigger variance (risk of overfitting)
+      \item \verb|min_samples_fit|: number of features to consider at each split. The minimum value of 2 means that the tree is fully developed (small bias but great variance).
 \end{itemize}
 
 \end{frame}
@@ -394,9 +395,8 @@ rf = RandomForestRegressor(n_estimators=n, max_features=maxf, min_samples_split=
         \item They can be determined using a score on the \alert{validation dataset} or using a \alert{cross-validation} procedure.
         \item A convenient (but very costly) procedure in scikit-learn: \alert{gridsearch}.
     \end{itemize}
-    \pause
     ~\\
-    \centering {Example on notebook}
+    \centering {\visible<3->{Example on notebook}}
 \end{frame}
 
 
@@ -485,11 +485,11 @@ $
     \item Weight $w_i$ are the parameters of the model to optimize
     \item If the activation function is identity, it is equivalent to a linear regression
 \end{itemize}
-
-\pause
+\visible<4->{
 \begin{block}{}
 More complexe models are build by combining several perceptrons
 \end{block}
+}
 
 \end{frame}
 
@@ -642,13 +642,43 @@ $\boxed{\color{red}\partial L/\partial \hat{y}}$
 \end{columns}
 
 \end{frame}
+
+\begin{frame}{Classification and regression loss}
+  
+   \begin{columns}
+   \column{.5\textwidth}
+   \alert{Regression}
+   \begin{itemize}
+       \item Last layer:\\
+       linear or hyperbolic tangent
+       \item Loss function:\\
+       $$L(\hat{y},y) = \sum_i (\hat{y}_i-y_i)^2$$
+   \end{itemize}
+   \pause
+\column{.5\textwidth}
+       \alert{Classification}
+   \begin{itemize}
+       \item Last layer:\\
+       Soft-max
+       $$
+       p_j=f_j(\mathbf{h}) = \frac{e^{h_j}}{\sum_k e^{h_k}}
+       $$
+       
+       \item Loss function:\\
+       Negative crossentropy
+       $$L(p,y) = -\sum_i \sum_j y_{i,j}.\log{p_{i,j}}$$
+   \end{itemize}
+   \end{columns}
+\end{frame}
+
+
 \begin{frame}{Batch/Stochastic training}
 Dataset: $(X,y)$ with N samples, $\mathbf{w}$: initial weights\\~\\
 \begin{columns}[t]
 \column{.5\textwidth}
 \alert{Batch Training:}
 \begin{itemize}
-    \item Repeat N times:\\
+    \item For $i$ from $1$ to $N$:\\
     \begin{enumerate}
     \item    $L = L + L(f(x_i),y_i)$
      \end{enumerate}
@@ -656,11 +686,12 @@ Dataset: $(X,y)$ with N samples, $\mathbf{w}$: initial weights\\~\\
     \item update weights:$\mathbf{w}$
     
 \end{itemize}
-1 Update is performed after N forward of the neural net.
+\alert{1 Update is performed after N forward passes of the neural net.}
+\pause
 \column{.5\textwidth}
 \alert{Stochastic Training:}
 \begin{itemize}
- \item Repeat N times:\\
+ \item For $i$ from $1$ to $N$:\\
      \begin{enumerate}
 
     \item Compute $L(f(x_i),y_i)$\\
@@ -668,8 +699,8 @@ Dataset: $(X,y)$ with N samples, $\mathbf{w}$: initial weights\\~\\
     \item update weights:$\mathbf{w}$
     \end{enumerate}
 \end{itemize}
-N Updates are performed after N forward of the neural net.
 
+\alert{N Updates are performed after N forward passes of the neural net.}
 \end{columns}
     
 \end{frame}
@@ -677,9 +708,9 @@ N Updates are performed after N forward of the neural net.
 \begin{frame}{Batch training}
 Dataset: $(X,y)$ with N samples, $\mathbf{w}$: initial weights\\~\\
 \begin{itemize}
-    \item Repeat N//B times
+    \item for $k$ from $1$ to  $N//B$:
 \begin{itemize}
- \item Repeat B times:\\
+ \item for $i$ from $B(k-1)+1$ to $Bk$:\\
      \begin{enumerate}
     \item Compute $L(f(x_i),y_i)$\\
     \end{enumerate}
@@ -687,7 +718,7 @@ Dataset: $(X,y)$ with N samples, $\mathbf{w}$: initial weights\\~\\
     \item update weights:$\mathbf{w}$
     \end{itemize}
 \end{itemize}
-N//B updates are performed after N forward of the neural net\\
+N//B updates are performed after N forward passes of the neural net\\
 \alert{B is the batchsize}
 \begin{itemize}
     \item \alert{B=1}: stochastic training
@@ -754,8 +785,8 @@ N//B updates are performed after N forward of the neural net\\
     \end{block}
 \end{frame}
 
-\begin{frame}{Convolutional Layer}
-A convolutional layer is composed of $p$ convolution (size of layer) extracting $p$ features from the data.
+\begin{frame}{Convolutional layer}
+A convolutional layer is composed of $p$ convolutions (size of layer) extracting $p$ features from the data.
 \begin{figure}
 \centering
     \includegraphics[width=.6\textwidth,trim={0 3.5cm 12.5cm 5cm},clip]{fig/L2/Cnn-layer.png}
