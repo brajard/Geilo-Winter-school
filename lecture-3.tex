@@ -27,6 +27,10 @@
 \usepackage{hhline}
 \usepackage{pgfplots}
 \usepackage{caption}
+\usepackage{natbib}
+\def\bibfont{\footnotesize}
+\def\bibname{}
+
 
 \usetikzlibrary{shapes.geometric}
 \usetikzlibrary{positioning}
@@ -146,10 +150,11 @@
 \newcommand{\mvide}{\nodepart{one} \nodepart{two}}
 \newcommand{\tvide}{\nodepart{one} \nodepart{two} \nodepart{three}}
 \newcommand{\rref}[1][]{\hfill{\scriptsize\textit{#1}}}
+ \bibliographystyle{alpha}
 
 %%Fin des commandes pour les listes/arbres.
 
-
+\bibliographystyle{apalike}
 
 %%% Paramètres du cours (à régler)
 %Numéro du cours
@@ -159,8 +164,7 @@
 \author[J. Brajard]{julien.brajard@nersc.no}
 \institute[NERSC/SU]{NERSC/Sorbonne University\\
 \url{https://github.com/brajard/Geilo-Winter-school}}
-\date{21-25 January 2018}https://www.overleaf.com/project/5c2f51d8449aef5318a30850
-
+\date{21-25 January 2018}
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%% SLIDES DE TITRE
 \begin{frame}
@@ -175,9 +179,34 @@
 \end{frame}
 
 \section{Machine learning as an emulator}
-\begin{frame}{Eddy detetection}
+\begin{frame}{Altimeter data}
+\begin{columns}[t]
+\column{.5\textwidth}
+    \begin{figure}
+        \centering
+        \caption*{Satellite altimeter}
+         \includegraphics[width=.6\textwidth]{fig/L3/TOPEX-Poseidon.png}
+    \end{figure}
+    
+
+\column{.5\textwidth}
+    \begin{figure}
+        \centering
+        \caption*{Sea surface height anomaly}
+         \includegraphics[width=.9\textwidth]{fig/L3/eddies.png}
+    \end{figure}
+
+    \end{columns}
+    \begin{block}{Structure detection}
+    Can we detect and charaterize eddies?
+    \end{block}
+\end{frame}
+
+\begin{frame}[t]{Eddy detection}
+\rref[\cite{Lguensat2017}]
     
 \end{frame}
+
 \begin{frame}{Inference of hidden parameters}
     
 \end{frame}
@@ -205,6 +234,10 @@
     
 \end{frame}
 
+\begin{frame}{}
+   \bibliography{references.bib}
+\end{frame}
+    
 %%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%
