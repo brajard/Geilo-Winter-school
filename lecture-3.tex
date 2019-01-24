@@ -172,12 +172,22 @@
 %\url{http://australe.upmc.fr} (onglet EPU-C5-IGE Info Gen)}
 \end{frame}
 
+\begin{frame}{AI Art?}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.5\textwidth]{fig/L3/478px-Edmond_de_Belamy.png}
+        \caption*{\textit{Edmond de Bellamy} by Obvious(collective)}
+    \end{figure}
+    Generated using a Generative Adversarial Network.\\
+    Selling prince (Oct. 2018): \$432,000
+\end{frame}
+
 \begin{frame}{Table of contents}
   \setbeamertemplate{section in toc}[sections numbered]
   \tableofcontents[hideallsubsections]
 \end{frame}
 
-\section{Machine learning as an emulator}
+\section{Machine learning to reveal complex connexions}
 \begin{frame}{Altimeter data}
 \begin{columns}[t]
 \column{.5\textwidth}
@@ -321,17 +331,32 @@ $\alpha_1=\alpha_4=1/6$,
 $\alpha_2=\alpha_3=2/6$,
 $\beta_1=\beta_4=1$ 
 and  $\beta_2=\beta_3=1/2$.
+\pause
 \column{.5\textwidth}
-
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{fig/L3/rk-resnet.png}\\
+    \pause
+      \caption*{Example on data simulated with a Lorenz 63 system}
+     \includegraphics[width=\textwidth]{fig/L3/result-resnet.png}\\
+   
+\end{figure}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Neural Net integration of ODEs}
-    
+\begin{frame}{Toward general framework: Neural ODE}
+    \rref[\cite{Chen2018NeuralEquations}: Best paper award NeurIPS, Dec. 2018]
+    $$
+    \mathbf{z}(t_1) = \mathbf{z}(t_0)  + \int_{t_0}^{t_1} f(\mathbf{z}(t),\theta) dt = \textrm{ODESolve}(\mathbf{z}(t_0),f,t_0,t_1,\theta)
+    $$
+    \begin{columns}
+    \end{columns}
 \end{frame}
-\begin{frame}{Toward an unified approach?}
-    
+
+\begin{frame}{Gradient backpropagation}
+
 \end{frame}
+
 \section{Merge approaches: between physics and machine learning}
 \begin{frame}{SST dynamic}
     
