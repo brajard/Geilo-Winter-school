@@ -150,7 +150,6 @@
 \newcommand{\mvide}{\nodepart{one} \nodepart{two}}
 \newcommand{\tvide}{\nodepart{one} \nodepart{two} \nodepart{three}}
 \newcommand{\rref}[1][]{\hfill{\scriptsize\textit{#1}}}
- \bibliographystyle{alpha}
 
 %%Fin des commandes pour les listes/arbres.
 
@@ -220,29 +219,113 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Inference of unknown parameters}
+\begin{frame}{Observations of sea velocity}
     %From Sea Surface Height (SSH) it is also possible to derive (partially) the surface currents.
     \begin{columns}
-    \column{.5\textwidth}
+    \column{.4\textwidth}
           \begin{figure}
         \centering
+        \caption*{ARGO floats are deployed in the oceans}
          \includegraphics[width=.7\textwidth]{fig/L3/argo-float.jpg}\\
+         \end{figure}
+         \pause
+              \column{.6\textwidth}
+\begin{figure}
+         \caption*{It measures several \textit{in-situ}  oceanic parameters}
          \includegraphics[width=\textwidth]{fig/L3/argo-status.png}
     \end{figure}
-     \column{.5\textwidth}
 
     \end{columns}
-    \end{frame}
-\begin{frame}{Forecasting}
     
-\end{frame}
+    \begin{columns}
+   \pause
+    \column{.6\textwidth}
+    Matching between:
+    \begin{itemize}
+        \item Sparse \textit{in-situ} velocity at 1000m
+        \item global surface velocity from satellite Sea-Surface heights (SSH).
+    \end{itemize}
+    \column{.4\textwidth} 
+    \begin{figure}
+         \includegraphics[width=\textwidth]{fig/L3/Surface_Currents_Kerguelen_Intro_resized_v2.pdf}
+    \end{figure}
+    
+    \end{columns}
+    \end{frame}
+    
+    \begin{frame}{Inference of unknown parameters}
+        \begin{columns}
+        \column{.6\textwidth}
+                \rref[\cite{Chapman2017ReconstructionMaps}]
+
+         \begin{figure}
+         \includegraphics[width=\textwidth]{fig/L3/Method_Schematic_Modified.pdf}
+    \end{figure}
+    \pause
+        \column{.4\textwidth}
+         \begin{figure}
+         \includegraphics[width=\textwidth]{fig/L3/Deep_Mean_2009_Recon_resized_crop.png}\\
+          \includegraphics[width=\textwidth]{fig/L3/Scatter_uv_obs_vs_predict_resize.pdf}
+    \end{figure}
+        \end{columns}
+    \end{frame}
+
 \section{Machine learning and differential equations}
 \begin{frame}{phyical system and differential equations}
+    For example, Motion fluid can be represented using Navier-Stokes equations (PDE):
     
+    $$ {\partial{\bf u}\over{\partial t}} = -  ({\bf u} \cdot \nabla) {\bf u} - {1\over\rho} \nabla p + \gamma\nabla^2{\bf u} + {1\over\rho}{\bf F} 
+    $$
+    \pause
+    After spatial discretization, can be represented as an ODE:
+    $$
+    \frac{d\mathbf{x}}{dt} = f(\mathbf{x(t))}
+    $$
 \end{frame}
+
 \begin{frame}{ResNET and ODE}
+\begin{columns}
+\column{.5\textwidth}
+Euler discretization scheme:
+$$
+ x(t+\Delta t) = x + \Delta t.f(x(t)) 
+$$
+\pause
+\column{.5\textwidth}
+    \begin{figure}
+    \centering
+    \includegraphics[width=.9\textwidth]{fig/L2/res_block.png}
+
+    \end{figure}
+    input: $x(t)$~\\ output:$x(t+\Delta t)$
+    $$
+    x(t+\Delta t) = x(t) + \Delta t.\mathcal{F}(x(t)) 
+    $$
     
+    \end{columns}
+    \pause
+    \alert{Training a ResNet is equivalent to training the underlying model in a Euler discretization scheme}
 \end{frame}
+\begin{frame}{Other schemes?}
+\begin{columns}
+\column{.5\textwidth}
+\rref[\cite{Fablet2017}]
+
+Runge-Kutta (order 4) integration scheme:
+$$
+x(t+\Delta t) = x(t) + \sum_{i=1}^4 \alpha_i k_i
+$$
+where $k_i = f(x(t+\beta_i k_{i-1}\Delta t))$\\
+$k_0=0$, 
+$\alpha_1=\alpha_4=1/6$,
+$\alpha_2=\alpha_3=2/6$,
+$\beta_1=\beta_4=1$ 
+and  $\beta_2=\beta_3=1/2$.
+\column{.5\textwidth}
+
+\end{columns}
+\end{frame}
+
 \begin{frame}{Neural Net integration of ODEs}
     
 \end{frame}
