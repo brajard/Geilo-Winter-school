@@ -350,16 +350,66 @@ and  $\beta_2=\beta_3=1/2$.
     \mathbf{z}(t_1) = \mathbf{z}(t_0)  + \int_{t_0}^{t_1} f(\mathbf{z}(t),\theta) dt = \textrm{ODESolve}(\mathbf{z}(t_0),f,t_0,t_1,\theta)
     $$
     \begin{columns}
+    \column{.5\textwidth}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{fig/L3/resVsODE.png}
+    \end{figure}
+    \column{.5\textwidth}
+        \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth,trim={0 5.4cm 0 0},clip]{fig/L3/ODEscheme.png}
+    \end{figure}
     \end{columns}
 \end{frame}
 
 \begin{frame}{Gradient backpropagation}
-
+\begin{block}{Objective}
+Computing $\partial L/ \partial \theta$
+\end{block}
+ \begin{columns}
+   
+    \column{.4\textwidth}
+        \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{fig/L3/ODEscheme.png}
+    \end{figure}
+    \column{.6\textwidth}
+    $\mathbf{z}(t_1) = \mathbf{z}(t_0)  + \int_{t_0}^{t_1} f(\mathbf{z}(t),\theta) dt$\\
+    Define the adjoint:\\
+    $\mathbf{a}(t)=\partial L / d\mathbf{z}(t)$\\
+    $$\mathbf{a}(t_0)=\mathbf{a}(t_1) -\int_{t_1}^{t_0} a(t)^T \frac{\partial d f(\mathbf{z(t)},\theta)}{\partial \mathbf{z}}dt$$
+      $$\frac{d L}{d\theta}=-\int_{t_1}^{t_0} a(t)^T \frac{\partial d f(\mathbf{z(t)},\theta)}{\partial \theta}dt$$
+    
+    $a(t)$ and $\frac{d L}{d\theta}=$ can be computed using the Same ODE solver backward in time.
+    \end{columns}
 \end{frame}
 
 \section{Merge approaches: between physics and machine learning}
 \begin{frame}{SST dynamic}
-    
+    \rref[\cite{DeBezenac2017TowardsModeling}]
+    \begin{block}{Objective}
+    Given $SST(t-h),\cdots,SST(t)$, predict $SST(t+\tau)$
+    \end{block}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.6\textwidth]{fig/L3/sst}
+        \caption{Caption}
+        \label{fig:my_label}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\begin{tikzpicture}
+\begin{scope}[text width=8em,anchor=east, align=right]
+\node (line2) {Deep learning forecast};
+\node [above of = line2,node distance = 1.2cm] (line1) {Reanalysis (truth)};
+\node [below of = line2,node distance = 2cm] (line3) {Motion estimate};
+\end{scope}
+\node [right of = line2, anchor=west, node distance = 1.8cm] (im) {\includegraphics[height=5cm]{./fig/sst.png}};
+\end{tikzpicture}
+\end{figure}
 \end{frame}
 \begin{frame}{Shallow-water and the need of additional constraints}
     
